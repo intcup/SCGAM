@@ -10,8 +10,6 @@ if(!isset($_SESSION['user'])){
 	$domici = $_POST['domicilio'];
 	$tel = $_POST['telefono'];
 
-	error_log(json_encode($_FILES));
-
 	// Guardar imagenes
 	$cred_file = "imagenes/" . preg_replace('/\s+/', '_', $ap_pat . $ap_mat . $nombre);
 	$extension = preg_replace("/.*\//", ".", $_FILES["cred_frente"]["type"]);

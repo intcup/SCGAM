@@ -1,11 +1,15 @@
 <?php
 session_start();
-$db = require('db/connect.php');
-$stm = $db->query('CALL login("' . $_POST['user'] . '","' . $_POST['pass'] . '")');
-$res = $stm->fetch_assoc();
-if($res || isset($_SESSION['user'])){
-	$_SESSION['user'] = $_POST['user'];
-	header("Location: panel.php");
+if(isset($_POST['user'])){
+	$db = require('db/connect.php');
+	$stm = $db->prepare('SELECT nombre FROM Usuarios WHERE nombre=?');
+	$stm->bind_param("s", $_POST['user']);
+	$stm->execute();
+	$stm->bind_result($nombre);
+	if( $stm->fetch() ){
+		$_SESSION['user'] = $nombre;
+		header("Location: panel.php");
+	}
 }
 ?>
 
