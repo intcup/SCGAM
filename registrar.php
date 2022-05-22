@@ -38,12 +38,19 @@ if(!isset($_SESSION['user'])){
 include "header.php";
 ?>
 <form method="POST" class="hor_form content" enctype="multipart/form-data">
+<label for="nombre">Nombre:</label>
 <input type="text" name="nombre"/>
+<label for="ap_pat">Apellido paterno:</label>
 <input type="text" name="ap_pat"/>
+<label for="ap_mat">Apellido materno:</label>
 <input type="text" name="ap_mat"/>
+<label for="domicilio">Domicilio:</label>
 <input type="text" name="domicilio"/>
+<label for="telefono">Telefono:</label>
 <input type="tel" name="telefono"/>
+<label for="cred_frente">Credencial frente:</label>
 <input type="file" name="cred_frente" capture="user" accept="image/*"/>
+<label for="cred_atras">Credencial reverso:</label>
 <input type="file" name="cred_atras" capture="user" accept="image/*"/>
 <input type="submit" value="Guardar"/>
 </form>

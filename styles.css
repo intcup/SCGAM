@@ -8,9 +8,13 @@ body{
 .hor_form {
 	display: block;
 }
-.hor_form > input, select{
+.hor_form > input, select, textarea {
 	margin: 5px;
 	display: block;
+}
+
+textarea {
+	width: 350px;
 }
 
 .content {

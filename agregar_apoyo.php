@@ -20,13 +20,13 @@ if(isset($_POST['id'])){
 include "header.php";
 ?>
 <p>
-<div class="content">
-<form class="hor_form" method="post">
+<form class="hor_form, content" method="post">
 <input value=
 "<?php
 echo $_GET['id'];
 ?>"
 type="hidden" name="id">
+<label for="area">Area</label>
 <select name="area">
 <?php
 	$areas = $db->prepare("SELECT id, nombre FROM Areas_Apoyos");
@@ -37,8 +37,8 @@ type="hidden" name="id">
 	}
 ?>
 </select>
+<label for="descripcion">Descripcion</label>
 <textarea name="descripcion"></textarea>
 <input type="submit" value="Enviar">
 </form>
-</div>
 </html>
