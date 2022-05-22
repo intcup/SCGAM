@@ -25,15 +25,18 @@ echo "agregar_apoyo.php?id=" . $data['id'];
 ">Agregar Apoyo</a>
 <table>
 <?php
-$st_a = $db->prepare("SELECT * FROM Apoyos WHERE ciudadano=?");
+$st_a = $db->prepare("SELECT descripcion, area.nombre  FROM Apoyos inner join Areas_Apoyos as area ON area.id = Apoyos.area WHERE ciudadano=?");
 $st_a->bind_param("i", $_GET['id']);
 $st_a->execute();
-$apoyos = $st_a->get_result();
+$st_a->bind_result($desc, $area);
 
 error_log(json_encode($apoyos));
 
-while ($apoyo = $apoyos->fetch_assoc()){
-	echo $apoyo["descripcion"];
+while ($st_a->fetch()){
+	echo "<tr>";
+	echo "<td>" . $desc . "</td>";
+	echo "<td>" . $area . "</td>";
+	echo "</tr>";
 }
 
 ?>
