@@ -7,14 +7,12 @@ session_start();
 <link rel="stylesheet" href="styles.css"/>
 </head>
 <body>
-<header>
 <?php
-echo $_SESSION['user'];
+include "header.php";
 ?>
-</header>
-<div class="content">
+<section class="content">
 <a href="registrar.php">Registrar Ciudadano</a>
 <a href="registros.php">Consultar Ciudadanos</a>
-</div>
+</section>
 </body>
 </html>

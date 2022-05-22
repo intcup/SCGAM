@@ -26,7 +26,7 @@ if(!isset($_SESSION['user'])){
 	$stm = $db->prepare("INSERT INTO Ciudadanos(nombre,ap_pat,ap_mat,domicilio,telefono,ruta_credencial_frente,ruta_credencial_reverso) VALUES (?,?,?,?,?,?,?)");
 	$stm->bind_param("sssssss", $nombre, $ap_pat, $ap_mat, $domici, $tel, $ruta_cred_f, $ruta_cred_a);
 	$stm->execute();
-	
+	header("Location: panel.php");	
 }
 ?>
 <html>
@@ -34,7 +34,9 @@ if(!isset($_SESSION['user'])){
 <title>Registrar</title>
 <link rel="stylesheet" href="styles.css"/>
 </head>
-
+<?php
+include "header.php";
+?>
 <form method="POST" class="hor_form content" enctype="multipart/form-data">
 <input type="text" name="nombre"/>
 <input type="text" name="ap_pat"/>
@@ -43,6 +45,6 @@ if(!isset($_SESSION['user'])){
 <input type="tel" name="telefono"/>
 <input type="file" name="cred_frente" capture="user" accept="image/*"/>
 <input type="file" name="cred_atras" capture="user" accept="image/*"/>
-<input type="submit"/>
+<input type="submit" value="Guardar"/>
 </form>
 </html>

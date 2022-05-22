@@ -8,6 +8,9 @@ header("Location: index.php");
 <link rel="stylesheet" href="styles.css">
 </head>
 <html>
+<?php
+include "header.php";
+?>
 <div class="content">
 	<table>
 		<tr>

@@ -19,7 +19,7 @@ if($data){
 </head>
 <html>
 <?php
-echo "<div>" . $data["nombre"] . "</div>";
+include "header.php";
 ?>
 <div class="content">
 <a href="

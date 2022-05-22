@@ -4,6 +4,7 @@
 body{
 	margin: unset;
 }
+
 .hor_form {
 	display: block;
 }
@@ -32,4 +33,24 @@ th, td {
 
 table {
 	border-collapse: collapse;
+}
+
+header {
+	background: #303035;
+	color: #f0f0f0;
+	padding: 20px;
+}
+
+span.links {
+	float: right;
+}
+
+span.links > a {
+	color: #f0f0f0;
+	padding: 10px;
+	border-radius: 15px;
+}
+
+span.links > a:hover {
+	color: #a0a0af;
 }

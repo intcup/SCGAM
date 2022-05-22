@@ -16,6 +16,9 @@ if(isset($_POST['id'])){
 <link rel="stylesheet" href="styles.css"/>
 </head>
 <html>
+<?php
+include "header.php";
+?>
 <p>
 <div class="content">
 <form class="hor_form" method="post">
