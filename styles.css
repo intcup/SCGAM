@@ -1,4 +1,35 @@
-.hor_form > input{
-	margin: auto;
+* {
+	font-family: Sans;
+}
+body{
+	margin: unset;
+}
+.hor_form {
 	display: block;
+}
+.hor_form > input, select{
+	margin: 5px;
+	display: block;
+}
+
+.content {
+	width: fit-content;
+	margin: 10px auto;
+	padding: 10px;
+	background: #f0f0f0;
+}
+a {
+	text-decoration: none;
+}
+
+tr:nth-child(even) {
+	background: #d0d0d0;
+}
+
+th, td {
+	padding: 15px;
+}
+
+table {
+	border-collapse: collapse;
 }

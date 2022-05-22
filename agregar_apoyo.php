@@ -9,12 +9,16 @@ if(isset($_POST['id'])){
 	$stm = $db->prepare("INSERT INTO Apoyos(descripcion,area,ciudadano) VALUES(?,?,?)");
 	$stm->bind_param("sii", $_POST['descripcion'], $_POST['area'], $_POST['id']);
 	$stm->execute();
+	header("Location: perfil_ciudadano.php?id=" . $_POST['id']);
 }
 ?>
-
+<head>
+<link rel="stylesheet" href="styles.css"/>
+</head>
 <html>
 <p>
-<form method="post">
+<div class="content">
+<form class="hor_form" method="post">
 <input value=
 "<?php
 echo $_GET['id'];
@@ -31,6 +35,7 @@ type="hidden" name="id">
 ?>
 </select>
 <textarea name="descripcion"></textarea>
-<input type="submit"/>
+<input type="submit" value="Enviar">
 </form>
+</div>
 </html>

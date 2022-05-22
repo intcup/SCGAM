@@ -14,16 +14,24 @@ if($data){
 	header("Location: registros.php");
 }
 ?>
+<head>
+<link rel="stylesheet" href="styles.css"/>
+</head>
 <html>
 <?php
 echo "<div>" . $data["nombre"] . "</div>";
 ?>
+<div class="content">
 <a href="
 <?php 
 echo "agregar_apoyo.php?id=" . $data['id'];
 ?>
 ">Agregar Apoyo</a>
 <table>
+<tr>
+	<th>Descripcion</th>
+	<th>Area</th>
+</tr>
 <?php
 $st_a = $db->prepare("SELECT descripcion, area.nombre  FROM Apoyos inner join Areas_Apoyos as area ON area.id = Apoyos.area WHERE ciudadano=?");
 $st_a->bind_param("i", $_GET['id']);
@@ -41,4 +49,5 @@ while ($st_a->fetch()){
 
 ?>
 </table>
+</div>
 </html>

@@ -34,7 +34,8 @@ if(!isset($_SESSION['user'])){
 <title>Registrar</title>
 <link rel="stylesheet" href="styles.css"/>
 </head>
-<form method="POST" class="hor_form" enctype="multipart/form-data">
+
+<form method="POST" class="hor_form content" enctype="multipart/form-data">
 <input type="text" name="nombre"/>
 <input type="text" name="ap_pat"/>
 <input type="text" name="ap_mat"/>
