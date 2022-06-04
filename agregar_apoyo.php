@@ -6,7 +6,7 @@ if(!isset($_SESSION["user"])){
 }
 
 if(isset($_POST['id'])){
-	$stm = $db->prepare("INSERT INTO Apoyos(descripcion,area,ciudadano) VALUES(?,?,?)");
+	$stm = $db->prepare("INSERT INTO Apoyos(descripcion,area,ciudadano,fecha) VALUES(?,?,?,SYSDATE())");
 	$stm->bind_param("sii", $_POST['descripcion'], $_POST['area'], $_POST['id']);
 	$stm->execute();
 	header("Location: perfil_ciudadano.php?id=" . $_POST['id']);

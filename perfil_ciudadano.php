@@ -31,12 +31,13 @@ echo "agregar_apoyo.php?id=" . $data['id'];
 <tr>
 	<th>Descripcion</th>
 	<th>Area</th>
+	<th>Fecha</th>
 </tr>
 <?php
-$st_a = $db->prepare("SELECT descripcion, area.nombre  FROM Apoyos inner join Areas_Apoyos as area ON area.id = Apoyos.area WHERE ciudadano=?");
+$st_a = $db->prepare("SELECT descripcion, area.nombre, fecha  FROM Apoyos inner join Areas_Apoyos as area ON area.id = Apoyos.area WHERE ciudadano=?");
 $st_a->bind_param("i", $_GET['id']);
 $st_a->execute();
-$st_a->bind_result($desc, $area);
+$st_a->bind_result($desc, $area, $fecha);
 
 error_log(json_encode($apoyos));
 
@@ -44,6 +45,7 @@ while ($st_a->fetch()){
 	echo "<tr>";
 	echo "<td>" . $desc . "</td>";
 	echo "<td>" . $area . "</td>";
+	echo "<td>" . $fecha . "</td>";
 	echo "</tr>";
 }
 
