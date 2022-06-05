@@ -32,12 +32,13 @@ echo "agregar_apoyo.php?id=" . $data['id'];
 	<th>Descripcion</th>
 	<th>Area</th>
 	<th>Fecha</th>
+	<th>PDF</th>
 </tr>
 <?php
-$st_a = $db->prepare("SELECT descripcion, area.nombre, fecha  FROM Apoyos inner join Areas_Apoyos as area ON area.id = Apoyos.area WHERE ciudadano=?");
+$st_a = $db->prepare("SELECT descripcion, area.nombre, fecha, Apoyos.id  FROM Apoyos inner join Areas_Apoyos as area ON area.id = Apoyos.area WHERE ciudadano=?");
 $st_a->bind_param("i", $_GET['id']);
 $st_a->execute();
-$st_a->bind_result($desc, $area, $fecha);
+$st_a->bind_result($desc, $area, $fecha, $id);
 
 error_log(json_encode($apoyos));
 
@@ -46,6 +47,7 @@ while ($st_a->fetch()){
 	echo "<td>" . $desc . "</td>";
 	echo "<td>" . $area . "</td>";
 	echo "<td>" . $fecha . "</td>";
+	echo "<td><a href='topdf.php?id=" . $id . "'>PDF</a></td>";
 	echo "</tr>";
 }
 
