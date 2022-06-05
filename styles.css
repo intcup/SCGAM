@@ -23,12 +23,17 @@ textarea {
 	padding: 10px;
 	background: #f0f0f0;
 }
+.content > a {
+	display: block;
+	margin: 10px;
+}
+
 a {
 	text-decoration: none;
 }
 
 tr:nth-child(even) {
-	background: #d0d0d0;
+	background: #BDD3D5;
 }
 
 th, td {
@@ -40,9 +45,11 @@ table {
 }
 
 header {
-	background: #303035;
+	background: #26BEC3;
 	color: #f0f0f0;
 	padding: 20px;
+	height: 20px;
+	font-weight: bold;
 }
 
 span.links {
@@ -56,5 +63,5 @@ span.links > a {
 }
 
 span.links > a:hover {
-	color: #a0a0af;
+	color: #c0c0c0;
 }
