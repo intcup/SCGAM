@@ -27,12 +27,13 @@ CREATE TABLE `Apoyos` (
   `ciudadano` int(11) NOT NULL,
   `descripcion` varchar(256) COLLATE utf8mb4_unicode_ci NOT NULL,
   `area` int(11) DEFAULT NULL,
+  `fecha` datetime NOT NULL,
   PRIMARY KEY (`id`),
   KEY `ciudadano` (`ciudadano`),
   KEY `area` (`area`),
   CONSTRAINT `Apoyos_ibfk_1` FOREIGN KEY (`ciudadano`) REFERENCES `Ciudadanos` (`id`),
   CONSTRAINT `Apoyos_ibfk_2` FOREIGN KEY (`area`) REFERENCES `Areas_Apoyos` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -93,4 +94,4 @@ CREATE TABLE `Usuarios` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-06-01 16:52:31
+-- Dump completed on 2022-06-05 12:56:51
