@@ -9,11 +9,14 @@ if(isset($_POST['user'])){
 	if( $stm->fetch() ){
 		if ( password_verify($_POST['pass'], $pass) ) {
 			$_SESSION['user'] = $nombre;
-			header("Location: panel.php");
 		} else {
 			
 		}
 	}
+}
+
+if(isset($_SESSION['user'])) {
+	header("Location: panel.php");
 }
 ?>
 
