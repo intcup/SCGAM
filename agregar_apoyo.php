@@ -6,8 +6,8 @@ if(!isset($_SESSION["user"])){
 }
 
 if(isset($_POST['id'])){
-	$stm = $db->prepare("INSERT INTO Apoyos(descripcion,area,ciudadano,fecha) VALUES(?,?,?,SYSDATE())");
-	$stm->bind_param("sii", $_POST['descripcion'], $_POST['area'], $_POST['id']);
+	$stm = $db->prepare("INSERT INTO Apoyos(descripcion,area,ciudadano,fecha, motivo) VALUES(?,?,?,SYSDATE(),?)");
+	$stm->bind_param("siis", $_POST['descripcion'], $_POST['area'], $_POST['id'], $_POST['motivo']);
 	$stm->execute();
 	header("Location: perfil_ciudadano.php?id=" . $_POST['id']);
 }
@@ -39,6 +39,7 @@ type="hidden" name="id">
 </select>
 <label for="descripcion">Descripcion</label>
 <textarea name="descripcion"></textarea>
+<textarea name="motivo"></textarea>
 <input type="submit" value="Enviar">
 </form>
 </html>

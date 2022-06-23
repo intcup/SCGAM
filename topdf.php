@@ -7,14 +7,14 @@ require('./fpdf/fpdf.php');
 $db = require('db/connect.php');
 // Leer datos de la bd
 $db->query('SET lc_time_names = "es_MX"');
-$stm = $db->prepare('SELECT CONCAT(nombre, " ", ap_pat), descripcion, domicilio, DAY(fecha), MONTHNAME(fecha), YEAR(fecha) FROM Apoyos LEFT JOIN Ciudadanos ON Apoyos.ciudadano = Ciudadanos.id WHERE Apoyos.id=?');
+$stm = $db->prepare('SELECT CONCAT(nombre, " ", ap_pat), descripcion, domicilio, DAY(fecha), MONTHNAME(fecha), YEAR(fecha), motivo FROM Apoyos LEFT JOIN Ciudadanos ON Apoyos.ciudadano = Ciudadanos.id WHERE Apoyos.id=?');
 if(!isset($_GET['id'])){
 	header("Location: index.php");
 }
 $id = $_GET['id'];
 $stm->bind_param('i', $id);
 $stm->execute();
-$stm->bind_result($nombre, $descripcion, $domicilio, $dia, $mes, $anio);
+$stm->bind_result($nombre, $descripcion, $domicilio, $dia, $mes, $anio, $motivo);
 $stm->fetch();
 
 $pdf=new FPDF();
@@ -41,7 +41,7 @@ $pdf->MultiCell(0, 6,
 	Presente:
 	"), 0, 'L');
 $pdf->Write(6, "El (la) que suscribe la presente C. $nombre Con domicilio en: $domicilio
-Por este medio me dirijo a usted de la manera mas atenta y cordial, para solicitarle en la medida de sus posibilidades, tenga a bien otorgarme un apoyo que consiste en $descripcion
+Por este medio me dirijo a usted de la manera mas atenta y cordial, para solicitarle en la medida de sus posibilidades, tenga a bien otorgarme un apoyo que consiste en $descripcion por el siguiente motivo: $motivo
 	");
 $pdf->Ln(60);
 $pdf->SetFont('Times','B',12);

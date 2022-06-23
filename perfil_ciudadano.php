@@ -40,8 +40,6 @@ $st_a->bind_param("i", $_GET['id']);
 $st_a->execute();
 $st_a->bind_result($desc, $area, $fecha, $id);
 
-error_log(json_encode($apoyos));
-
 while ($st_a->fetch()){
 	echo "<tr>";
 	echo "<td>" . $desc . "</td>";
