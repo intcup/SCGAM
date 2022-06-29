@@ -1,8 +1,8 @@
--- MariaDB dump 10.19  Distrib 10.7.3-MariaDB, for Linux (x86_64)
+-- MariaDB dump 10.19  Distrib 10.8.3-MariaDB, for Linux (x86_64)
 --
 -- Host: localhost    Database: SCGAM
 -- ------------------------------------------------------
--- Server version	10.7.3-MariaDB
+-- Server version	10.8.3-MariaDB
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -28,12 +28,13 @@ CREATE TABLE `Apoyos` (
   `descripcion` varchar(256) COLLATE utf8mb4_unicode_ci NOT NULL,
   `area` int(11) DEFAULT NULL,
   `fecha` datetime NOT NULL,
+  `motivo` varchar(64) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `ciudadano` (`ciudadano`),
   KEY `area` (`area`),
   CONSTRAINT `Apoyos_ibfk_1` FOREIGN KEY (`ciudadano`) REFERENCES `Ciudadanos` (`id`),
   CONSTRAINT `Apoyos_ibfk_2` FOREIGN KEY (`area`) REFERENCES `Areas_Apoyos` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -47,7 +48,7 @@ CREATE TABLE `Areas_Apoyos` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(32) COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -67,7 +68,7 @@ CREATE TABLE `Ciudadanos` (
   `ruta_credencial_frente` varchar(256) COLLATE utf8mb4_unicode_ci NOT NULL,
   `ruta_credencial_reverso` varchar(256) COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -82,7 +83,40 @@ CREATE TABLE `Usuarios` (
   `nombre` varchar(30) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `pass` char(60) COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `orden_compra`
+--
+
+DROP TABLE IF EXISTS `orden_compra`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `orden_compra` (
+  `id_orden` int(11) NOT NULL AUTO_INCREMENT,
+  `fecha` date NOT NULL,
+  `proveedor` varchar(32) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `ciudadano` int(11) NOT NULL,
+  `justificacion` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL,
+  PRIMARY KEY (`id_orden`),
+  KEY `fk_ciudadano` (`ciudadano`),
+  CONSTRAINT `fk_ciudadano` FOREIGN KEY (`ciudadano`) REFERENCES `Ciudadanos` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `productos_orden`
+--
+
+DROP TABLE IF EXISTS `productos_orden`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `productos_orden` (
+  `nombre` varchar(32) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `cantidad` int(11) DEFAULT NULL,
+  `id_orden` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -94,4 +128,4 @@ CREATE TABLE `Usuarios` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-06-05 12:56:51
+-- Dump completed on 2022-06-29 18:23:03
