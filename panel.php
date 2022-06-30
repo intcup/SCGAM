@@ -13,6 +13,7 @@ include "header.php";
 <section class="content">
 <a href="registrar.php">Registrar Ciudadano</a>
 <a href="registros.php">Consultar Ciudadanos</a>
+<a href="ordenes_compra.php">Orden de compra</a>
 <a href="apoyos_fecha.php">Apoyos Registrados hoy</a>
 <a href="apoyos_fecha.php?f=
 <?php

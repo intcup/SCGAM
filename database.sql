@@ -97,11 +97,9 @@ CREATE TABLE `orden_compra` (
   `id_orden` int(11) NOT NULL AUTO_INCREMENT,
   `fecha` date NOT NULL,
   `proveedor` varchar(32) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `ciudadano` int(11) NOT NULL,
+  `ciudadano` varchar(64) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `justificacion` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL,
-  PRIMARY KEY (`id_orden`),
-  KEY `fk_ciudadano` (`ciudadano`),
-  CONSTRAINT `fk_ciudadano` FOREIGN KEY (`ciudadano`) REFERENCES `Ciudadanos` (`id`)
+  PRIMARY KEY (`id_orden`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -128,4 +126,4 @@ CREATE TABLE `productos_orden` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-06-29 18:23:03
+-- Dump completed on 2022-06-30  1:06:41
