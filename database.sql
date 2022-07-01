@@ -116,6 +116,25 @@ CREATE TABLE `productos_orden` (
   `id_orden` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `vale_combustible`
+--
+
+DROP TABLE IF EXISTS `vale_combustible`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `vale_combustible` (
+  `id_vale` int(11) NOT NULL AUTO_INCREMENT,
+  `fecha` date NOT NULL,
+  `proveedor` varchar(32) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `tipo` varchar(16) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `ciudadano` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `justificacion` varchar(128) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `cantidad` int(11) NOT NULL DEFAULT 1,
+  PRIMARY KEY (`id_vale`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -126,4 +145,4 @@ CREATE TABLE `productos_orden` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-06-30  1:06:41
+-- Dump completed on 2022-06-30 19:22:02
