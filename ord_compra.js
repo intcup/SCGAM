@@ -19,7 +19,7 @@ function add_item(){
 	row.append(link);
 	tabla.append(row);
 	articulos.push(row);
-	fields.cant.value = "";
+	fields.cant.value = "1";
 	fields.producto.value = "";
 }
 

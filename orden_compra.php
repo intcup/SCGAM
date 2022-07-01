@@ -22,14 +22,31 @@ include("header.php");
 ?>
 <section class="content">
 	<form id="orden">
+		<br>
+		<label>Ciudadano</label>
+		<br>
 		<input name="ciudadano"/>
+		<br>
+		<label>Proveedor</label>
+		<br>
 		<input name="proveedor"/>
+		<br>
+		<label>Justificacion</label>
+		<br>
 		<input name="justificacion"/>
-		<input type="submit"/>
+		<br>
+		<input type="submit" value="Enviar"/>
 	</form>
 	<form id="add_item">
+		<br>
+		<label>Cantidad</label>
+		<br>
 		<input id="cant" type="number" step="1" value="1"/>
+		<br>
+		<label>Producto</label>
+		<br>
 		<input id="producto"/>
+		<br>
 		<input type="button" value="Agregar" onclick="add_item()"/>
 	</form>
 	<table>
