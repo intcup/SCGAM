@@ -23,12 +23,14 @@ $stm = $db->prepare('SELECT id_orden, proveedor, ciudadano, justificacion, fecha
 $stm->execute();
 $stm->bind_result($id,$prov,$ciud,$just, $fecha);
 while($stm->fetch()){
+	echo "<tr>";
 	echo "<td>" . $id . "</td>";
 	echo "<td>" . $ciud . "</td>";
 	echo "<td>" . $prov . "</td>";
 	echo "<td>" . $fecha . "</td>";
    	echo "<td>" . $just . "</td>";
 	echo "<td><a href='ord_compra_pdf.php?id=$id'>PDF</a></td>";
+	echo "</tr>";
 }
 ?>
 		</tbody>

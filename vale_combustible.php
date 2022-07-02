@@ -31,7 +31,7 @@ if(isset($_POST['proveedor'])){
 		<br>
 		<label>Tipo</label>
 		<br>
-		<input type="number" step="1"/>
+		<input name="cantidad" type="number" step="1"/>
 		<br>
 		<label>Ciudadano</label>
 		<br>
