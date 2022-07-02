@@ -1,8 +1,6 @@
 <header>
-<span>
-<?php
-echo $_SESSION["user"];
-?>
+<img src="logo.png" style="height: 50px"></img>
+<span class="user">
 </span>
 <span class="links">
 <?php
@@ -12,5 +10,6 @@ if ($_SESSION['user'] = 'admin') {
 ?>
 <a href="panel.php">Inicio</a>
 <a href="logout.php">Cerrar Sesion</a>
+</span>
 </span>
 </header>

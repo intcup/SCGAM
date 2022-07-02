@@ -45,15 +45,18 @@ table {
 }
 
 header {
-	background: #26BEC3;
+	background: #004040;
 	color: #f0f0f0;
-	padding: 20px;
-	height: 20px;
 	font-weight: bold;
+	padding: 20px;
+}
+
+span.user {
 }
 
 span.links {
 	float: right;
+	margin: auto auto;
 }
 
 span.links > a {
