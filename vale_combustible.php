@@ -29,7 +29,7 @@ if(isset($_POST['proveedor'])){
 			<option>Gas</option>
 		</select>
 		<br>
-		<label>Tipo</label>
+		<label>Cantidad</label>
 		<br>
 		<input name="cantidad" type="number" step="1"/>
 		<br>

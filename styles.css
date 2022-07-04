@@ -68,3 +68,7 @@ span.links > a {
 span.links > a:hover {
 	color: #c0c0c0;
 }
+
+input {
+	display: block;
+}

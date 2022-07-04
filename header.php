@@ -4,7 +4,7 @@
 </span>
 <span class="links">
 <?php
-if ($_SESSION['user'] = 'admin') {
+if ($_SESSION['user'] == 'admin') {
 	echo '<a href="admin_panel.php">Administrar</a>';
 }
 ?>

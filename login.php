@@ -9,6 +9,7 @@ if(isset($_POST['user'])){
 	if( $stm->fetch() ){
 		if ( password_verify($_POST['pass'], $pass) ) {
 			$_SESSION['user'] = $nombre;
+			error_log($nombre);
 		} else {
 			
 		}

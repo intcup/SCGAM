@@ -24,6 +24,7 @@ $stm = $db->prepare('SELECT id_vale, fecha, proveedor, tipo, ciudadano, justific
 $stm->execute();
 $stm->bind_result($id, $fecha, $prov, $tipo, $ciud, $just, $cant);
 while($stm->fetch()){
+	echo '<tr>';
 	echo '<td>' . $id . '</td>';
 	echo '<td>' . $fecha . '</td>';
 	echo '<td>' . $prov . '</td>';
@@ -31,7 +32,8 @@ while($stm->fetch()){
 	echo '<td>' . $ciud . '</td>';
 	echo '<td>' . $just. '</td>';
 	echo '<td>' . $cant . '</td>';
-	echo '<td><a href="vale_combustible_pdf.php?id=' . $cant . '">PDF</a></td>';
+	echo '<td><a href="vale_combustible_pdf.php?id=' . $id . '">PDF</a></td>';
+	echo '</tr>';
 }
 ?>
 	</table>
