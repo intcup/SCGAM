@@ -7,10 +7,10 @@ require('./fpdf/fpdf.php');
 $db = require('db/connect.php');
 // Leer datos de la bd
 $db->query('SET lc_time_names = "es_MX"');
-$stm = $db->prepare('SELECT proveedor, DATE_FORMAT(fecha, "%d de %M del %Y")FROM orden_compra WHERE id_orden=?');
+$stm = $db->prepare('SELECT Proveedores.nombre, DATE_FORMAT(fecha, "%d de %M del %Y"), ciudadano FROM orden_compra LEFT JOIN Proveedores ON Proveedores.id = proveedor WHERE id_orden=?');
 $stm->bind_param('i', $id);
 $stm->execute();
-$stm->bind_result($prov, $fecha);
+$stm->bind_result($prov, $fecha, $ciudadano);
 $stm->fetch();
 $stm->close();
 
@@ -30,7 +30,9 @@ $pdf->Ln();
 $pdf->Cell(0,6, utf8_decode('Fecha'), 0, 1, 'R');
 $pdf->Cell(0,6, utf8_decode($fecha), 0, 1, 'R');
 $pdf->SetFont('Times','',12);
-$pdf->Cell(0,5, 'Le suplicamos surta al portador lo siguiente:', 0, 1);
+$pdf->Cell(0,5, 'Para: ' . $prov, 0, 1);
+$pdf->Cell(0,5, 'Le suplicamos surta lo siguiente a ' . $ciudadano , 0, 1);
+$pdf->Ln();
 $pdf->SetFillColor(150);
 $pdf->Cell(30,5, 'Cant', 1, 0, 'L', true);
 $pdf->Cell(0,5, 'Descripcion', 1, 0, 'L', true);

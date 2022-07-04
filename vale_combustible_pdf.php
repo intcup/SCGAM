@@ -29,7 +29,7 @@ $pdf->Cell(0,6,'VALE DE COMBUSTIBLE',0, 1, 'C');
 $pdf->Ln(10);
 $pdf->Cell(($pdf->GetPageWidth() / 2) - 10,6, 'FECHA: ' . $fecha, 0, 0, 'C');
 $pdf->Cell(($pdf->GetPageWidth() / 2) - 10,6, 'FOLIO: ' . $id, 0, 1, 'C');
-
+$pdf->Ln();
 $pdf->SetFont('Times','',12);
 $pdf->Cell(0,6,'SR. ' . $prove, 0, 1);
 $pdf->Cell(0,6,'FAVOR DE SURTIR ' . $cant . ' LTS DE ' . $tipo, 0, 1);
