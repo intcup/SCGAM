@@ -72,6 +72,20 @@ CREATE TABLE `Ciudadanos` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Table structure for table `Proveedores`
+--
+
+DROP TABLE IF EXISTS `Proveedores`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `Proveedores` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(32) COLLATE utf8mb4_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Table structure for table `Usuarios`
 --
 
@@ -113,7 +127,9 @@ DROP TABLE IF EXISTS `productos_orden`;
 CREATE TABLE `productos_orden` (
   `nombre` varchar(32) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `cantidad` int(11) DEFAULT NULL,
-  `id_orden` int(11) DEFAULT NULL
+  `id_orden` int(11) DEFAULT NULL,
+  KEY `fk_id_orden` (`id_orden`),
+  CONSTRAINT `fk_id_orden` FOREIGN KEY (`id_orden`) REFERENCES `orden_compra` (`id_orden`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -127,12 +143,14 @@ DROP TABLE IF EXISTS `vale_combustible`;
 CREATE TABLE `vale_combustible` (
   `id_vale` int(11) NOT NULL AUTO_INCREMENT,
   `fecha` date NOT NULL,
-  `proveedor` varchar(32) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `proveedor` int(11) NOT NULL,
   `tipo` varchar(16) COLLATE utf8mb4_unicode_ci NOT NULL,
   `ciudadano` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL,
   `justificacion` varchar(128) COLLATE utf8mb4_unicode_ci NOT NULL,
   `cantidad` int(11) NOT NULL DEFAULT 1,
-  PRIMARY KEY (`id_vale`)
+  PRIMARY KEY (`id_vale`),
+  KEY `fk_proveedor` (`proveedor`),
+  CONSTRAINT `fk_proveedor` FOREIGN KEY (`proveedor`) REFERENCES `Proveedores` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -145,4 +163,4 @@ CREATE TABLE `vale_combustible` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-06-30 19:22:02
+-- Dump completed on 2022-07-04 15:24:38

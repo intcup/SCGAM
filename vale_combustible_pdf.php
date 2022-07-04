@@ -8,7 +8,7 @@ $db = require('db/connect.php');
 // Leer datos de la bd
 $db->query('SET lc_time_names = "es_MX"');
 
-$stm = $db->prepare('SELECT fecha, proveedor, tipo, ciudadano, justificacion, cantidad FROM vale_combustible WHERE id_vale=?');
+$stm = $db->prepare('SELECT fecha, Proveedores.nombre, tipo, ciudadano, justificacion, cantidad FROM vale_combustible LEFT JOIN Proveedores ON proveedor = Proveedores.id WHERE id_vale=?');
 $stm->bind_param('i', $id);
 $stm->execute();
 $stm->bind_result($fecha, $prove, $tipo, $ciud, $just, $cant);

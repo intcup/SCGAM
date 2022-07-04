@@ -19,7 +19,6 @@ if(isset($_POST["ag_ar"])){
 <form method="POST">
 <label for="area">Area:</label>
 <input type="text" name="nombre" id="area"/>
-<br>
 <input type="submit" name="ag_ar" value="Agregar"/>
 </form>
 
@@ -39,6 +38,19 @@ if(isset($_POST['agr_usr'])){
 	$user = $_POST['usuario'];
 	$ins->bind_param("ss", $user, $hash);
 	$ins->execute();
+}
+?>
+<h1>Proveedores</h1>
+<form method="POST">
+	<label>Nombre:</label>
+	<input name='nombre'/>
+	<input type="submit" name="agr_prov" value="Agregar"/>
+</form>
+<?php
+if(isset($_POST["agr_prov"])){
+	$stm = $db->prepare("INSERT INTO Proveedores(nombre) VALUES(?)");
+	$stm->bind_param("s", $_POST["nombre"]);
+	$stm->execute();
 }
 ?>
 </section>
