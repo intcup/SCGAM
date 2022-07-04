@@ -23,6 +23,9 @@ $pdf->MultiCell(0,6,'PRESIDENCIA MUNICIPAL
 	GRAL. ZARAGOZA, NUEVO LEON
 	ADMINISTRACION 2021-2024
 ', 0, 'C');
+$pdf->SetFont('Times','',12);
+$pdf->Cell(0,6, utf8_decode('RFC MGZ850101FC2'), 0, 1, 'C');
+$pdf->SetFont('Times','B',16);
 $pdf->Ln(20);
 $pdf->Cell(0,6, utf8_decode('Nº Orden'), 0, 1, 'R');
 $pdf->Cell(0,6, utf8_decode($id), 0, 1, 'R');
