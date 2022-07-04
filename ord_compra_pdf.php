@@ -7,7 +7,7 @@ require('./fpdf/fpdf.php');
 $db = require('db/connect.php');
 // Leer datos de la bd
 $db->query('SET lc_time_names = "es_MX"');
-$stm = $db->prepare('SELECT proveedor, fecha FROM orden_compra WHERE id_orden=?');
+$stm = $db->prepare('SELECT proveedor, DATE_FORMAT(fecha, "%d de %M del %Y")FROM orden_compra WHERE id_orden=?');
 $stm->bind_param('i', $id);
 $stm->execute();
 $stm->bind_result($prov, $fecha);
