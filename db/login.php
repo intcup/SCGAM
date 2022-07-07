@@ -1,5 +1,12 @@
 <?php
+session_start();
 $db = require('connect.php');
-if(isset($_POST["user"])){
-	error_log(json_encode($_POST));
+if(!isset($_SESSION['user'])){
+	header('Location: login.php');
+}
+
+function login($rol){
+	if($rol > $_SESSION['rol']){
+		header('Location: panel.php');
+	}
 }

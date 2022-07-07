@@ -64,7 +64,7 @@ if(isset($_POST['agr_usr'])){
 }
 ?>
 <?php
-table("SELECT * FROM Usuarios");
+table("SELECT id, nombre, rol FROM Usuarios");
 ?>
 <h1 class="icon" style="background-image: url('icon_proveedor.png')">Proveedores</h1>
 <form method="POST">
@@ -72,6 +72,7 @@ table("SELECT * FROM Usuarios");
 	<br>
 	<input type="submit" name="agr_prov" value="Agregar"/>
 </form>
+<a href="cambiar_contra.php">Cambiar Contraseña</a>
 <?php
 if(isset($_POST["agr_prov"])){
 	$stm = $db->prepare("INSERT INTO Proveedores(nombre) VALUES(?)");

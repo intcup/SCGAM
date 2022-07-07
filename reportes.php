@@ -50,15 +50,15 @@ if( isset($_GET['desde']) && $_GET['desde'] != ""){
 }else{
 	$desde = date('0000-00-00');
 }
-$stm = $db->prepare("SELECT Apoyos.id, fecha, descripcion, motivo, CONCAT(Ciudadanos.nombre, ' ', Ciudadanos.ap_pat, ' ', Ciudadanos.ap_mat) FROM Apoyos LEFT JOIN Ciudadanos ON ciudadano = Ciudadanos.id WHERE fecha <= ? AND fecha >= ?");
+$stm = $db->prepare("SELECT Apoyos.id, fecha, descripcion, motivo, CONCAT(Ciudadanos.nombre, ' ', Ciudadanos.ap_pat, ' ', Ciudadanos.ap_mat), Ciudadanos.id FROM Apoyos LEFT JOIN Ciudadanos ON ciudadano = Ciudadanos.id WHERE fecha <= ? AND fecha >= ?");
 $stm->bind_param("ss", $hasta, $desde);
 $stm->execute();
-$stm->bind_result($id, $fecha, $descripcion, $motivo, $ciudadano);
+$stm->bind_result($id, $fecha, $descripcion, $motivo, $ciudadano, $ciud_id);
 
 while($stm->fetch()){
 	echo "<tr>";
 	echo "<td>" . $id. "</td>";
-	echo "<td>" . $ciudadano . "</td>";
+	echo "<td><a href='perfil_ciudadano.php?id=" . $ciud_id . "'>" . $ciudadano . "</a></td>";
 	echo "<td>" . $fecha . "</td>";
 	echo "<td>" . $descripcion . "</td>";
 	echo "<td>" . $motivo . "</td>";
@@ -85,16 +85,16 @@ if($existe && $_SESSION['rol'] < 3){
 		</thead>
 		<tbody>
 <?php
-$stm = $db->prepare("SELECT id_orden, fecha, Proveedores.nombre, justificacion, CONCAT(Ciudadanos.nombre, ' ', Ciudadanos.ap_pat, ' ', Ciudadanos.ap_mat) FROM orden_compra LEFT JOIN Proveedores ON proveedor = Proveedores.id LEFT JOIN Ciudadanos ON ciudadano = Ciudadanos.id WHERE fecha <= ? AND fecha >= ?");
+$stm = $db->prepare("SELECT id_orden, fecha, Proveedores.nombre, justificacion, CONCAT(Ciudadanos.nombre, ' ', Ciudadanos.ap_pat, ' ', Ciudadanos.ap_mat), Ciudadanos.id FROM orden_compra LEFT JOIN Proveedores ON proveedor = Proveedores.id LEFT JOIN Ciudadanos ON ciudadano = Ciudadanos.id WHERE fecha <= ? AND fecha >= ?");
 $stm->bind_param("ss", $hasta, $desde);
 $stm->execute();
-$stm->bind_result($id, $fecha, $proveedor, $justificacion, $nombre);
+$stm->bind_result($id, $fecha, $proveedor, $justificacion, $nombre, $ciud_id);
 
 while($stm->fetch()){
 
 	echo "<tr>";
 	echo "<td>" . $id . "</td>";
-	echo "<td>" . $nombre . "</td>";
+	echo "<td><a href='perfil_ciudadano.php?id=" . $ciud_id . "'>" . $nombre . "</a></td>";
 	echo "<td>" . $fecha . "</td>";
 	echo "<td>" . $proveedor . "</td>";
 	echo "<td>" . $justificacion . "</td>";
@@ -115,6 +115,7 @@ if($existe && $_SESSION['rol'] < 3){
 		<thead>
 			<th>Folio</th>
 			<th>Fecha</th>
+			<th>Ciudadano</th>
 			<th>Proveedor</th>
 			<th>Cantidad</th>
 			<th>Tipo</th>
@@ -123,17 +124,18 @@ if($existe && $_SESSION['rol'] < 3){
 		</thead>
 		<tbody>
 <?php
-$stm = $db->prepare("SELECT id_vale, fecha, Proveedores.nombre, justificacion, cantidad, tipo, CONCAT(Ciudadanos.nombre, ' ', Ciudadanos.ap_pat, ' ', Ciudadanos.ap_mat) FROM vale_combustible LEFT JOIN Proveedores ON proveedor = Proveedores.id 
+$stm = $db->prepare("SELECT id_vale, fecha, Proveedores.nombre, justificacion, cantidad, tipo, CONCAT(Ciudadanos.nombre, ' ', Ciudadanos.ap_pat, ' ', Ciudadanos.ap_mat), Ciudadanos.id FROM vale_combustible LEFT JOIN Proveedores ON proveedor = Proveedores.id 
 	LEFT JOIN Ciudadanos ON ciudadano = Ciudadanos.id
 	WHERE fecha <= ? AND fecha >= ?");
 $stm->bind_param("ss", $hasta, $desde);
 $stm->execute();
-$stm->bind_result($id, $fecha, $proveedor, $justificacion, $cantidad, $tipo, $ciudadano);
+$stm->bind_result($id, $fecha, $proveedor, $justificacion, $cantidad, $tipo, $ciudadano, $ciud_id);
 
 while($stm->fetch()){
 	echo "<tr>";
 	echo "<td>" . $id . "</td>";
 	echo "<td>" . $fecha . "</td>";
+	echo "<td><a href='perfil_ciudadano.php?id=" . $ciud_id . "'>" . $ciudadano . "</a></td>";
 	echo "<td>" . $proveedor . "</td>";
 	echo "<td>" . $cantidad. "</td>";
 	echo "<td>" . $tipo . "</td>";
