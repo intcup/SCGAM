@@ -12,7 +12,7 @@ include "header.php";
 $db = include("db/connect.php");
 ?>
 <section class="content">
-	<h1 class="icon" style="background-image: url('icon_reportes.png')">Reportes</h1>
+	<h1 class="icon" style="background-image: url('icon_reportes.png')">Perfil Ciudadano</h1>
 	<form>
 		<label for="id">Id Ciudadano:</label>
 		<input id="ciudadano" name="id" <?php
@@ -28,6 +28,7 @@ if(isset($_GET['id'])){
 	</form>
 <?php
 include('datos_ciudadano.php');
+echo '<img src="' . $ruta_cred . '" height="200px">';
 ?>
 	<h2>Apoyos</h2>
 <?php
