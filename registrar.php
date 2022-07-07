@@ -1,6 +1,6 @@
 <?php
 session_start();
-if(!isset($_SESSION['user'])){
+if(!isset($_SESSION['user']) || $_SESSION['rol'] > 2){
 	header("Location: index.php");	
 	exit;
 }else if(isset($_POST['nombre'])){
