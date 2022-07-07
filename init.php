@@ -13,5 +13,6 @@ if($count == 0){
 	$ins->bind_param("ss", $user, $hash);
 	$ins->execute();
 }
+header("Location: login.php");
 
 ?>
