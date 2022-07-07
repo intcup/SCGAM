@@ -8,7 +8,7 @@ $db = require('db/connect.php');
 // Leer datos de la bd
 $db->query('SET lc_time_names = "es_MX"');
 
-$stm = $db->prepare('SELECT DATE_FORMAT(fecha, "%d de %M del %Y"), Proveedores.nombre, tipo, CONCAT(ciudadanos.nombre, " ", ciudadanos.ap_pat, " ", ciudadanos.ap_mat), justificacion, cantidad, ruta_credencial_frente, ruta_credencial_reverso FROM vale_combustible LEFT JOIN Proveedores ON proveedor = Proveedores.id LEFT JOIN ciudadanos ON ciudadano = ciudadanos.id WHERE id_vale=?');
+$stm = $db->prepare('SELECT DATE_FORMAT(fecha, "%d de %M del %Y"), Proveedores.nombre, tipo, CONCAT(Ciudadanos.nombre, " ", Ciudadanos.ap_pat, " ", Ciudadanos.ap_mat), justificacion, cantidad, ruta_credencial_frente, ruta_credencial_reverso FROM vale_combustible LEFT JOIN Proveedores ON proveedor = Proveedores.id LEFT JOIN Ciudadanos ON ciudadano = Ciudadanos.id WHERE id_vale=?');
 $stm->bind_param('i', $id);
 $stm->execute();
 $stm->bind_result($fecha, $prove, $tipo, $ciud, $just, $cant, $ruta_f, $ruta_r);
@@ -36,9 +36,8 @@ $pdf->Cell(0,6,'FAVOR DE SURTIR ' . $cant . ' LITROS DE ' . $tipo, 0, 1);
 $pdf->Cell(0,6,'AL C. ' . $ciud , 0, 1);
 $pdf->Cell(0,6,'JUSTIFICACION: ' . $just , 0, 1);
 $pdf->Ln(5);
-$pdf->Image($ruta_f, 60, null, 80);
-$pdf->Ln(2);
-$pdf->Image($ruta_r, 60, null, 80);
+$pdf->Image($ruta_f, 10, $pdf->getY() + 5, 0, 50);
+$pdf->Image($ruta_r, 95, $pdf->getY() + 5, 0, 50);
 
 $pdf->setY(-60, true);
 $pdf->Cell(0,5, 'Firmas Autorizadas', 0, 1, 'C');

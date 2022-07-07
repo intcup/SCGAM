@@ -7,14 +7,14 @@ require('./fpdf/fpdf.php');
 $db = require('db/connect.php');
 // Leer datos de la bd
 $db->query('SET lc_time_names = "es_MX"');
-$stm = $db->prepare('SELECT CONCAT(nombre, " ", ap_pat, " ", ap_mat), descripcion, domicilio, DAY(fecha), MONTHNAME(fecha), YEAR(fecha), motivo FROM Apoyos LEFT JOIN Ciudadanos ON Apoyos.ciudadano = Ciudadanos.id WHERE Apoyos.id=?');
+$stm = $db->prepare('SELECT CONCAT(nombre, " ", ap_pat, " ", ap_mat), descripcion, domicilio, DAY(fecha), MONTHNAME(fecha), YEAR(fecha), motivo, ruta_credencial_frente, ruta_credencial_reverso FROM Apoyos LEFT JOIN Ciudadanos ON Apoyos.ciudadano = Ciudadanos.id WHERE Apoyos.id=?');
 if(!isset($_GET['id'])){
 	header("Location: index.php");
 }
 $id = $_GET['id'];
 $stm->bind_param('i', $id);
 $stm->execute();
-$stm->bind_result($nombre, $descripcion, $domicilio, $dia, $mes, $anio, $motivo);
+$stm->bind_result($nombre, $descripcion, $domicilio, $dia, $mes, $anio, $motivo, $ruta_f, $ruta_r);
 $stm->fetch();
 
 $pdf=new FPDF();
@@ -42,6 +42,9 @@ $pdf->MultiCell(0, 6,
 	"), 0, 'L');
 $pdf->Write(6, "El (la) que suscribe la presente C. " . utf8_decode($nombre) . " Con domicilio en: " . utf8_decode($domicilio) .
 " Por este medio me dirijo a usted de la manera mas atenta y cordial, para solicitarle en la medida de sus posibilidades, tenga a bien otorgarme un apoyo que consiste en " . utf8_decode($descripcion) . " por el siguiente motivo: " . utf8_decode($motivo) );
+$pdf->Ln(5);
+$pdf->Image($ruta_f, 10, $pdf->getY() + 5,0, 50);
+$pdf->Image($ruta_r, 95, $pdf->getY() + 5,0, 50);
 $pdf->Ln(60);
 $pdf->SetFont('Times','B',12);
 $pdf->Cell(0, 6, "Atentamente:", 0, 1, 'C');

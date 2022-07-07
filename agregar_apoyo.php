@@ -9,7 +9,7 @@ if(isset($_POST['env'])){
 	$stm = $db->prepare("INSERT INTO Apoyos(descripcion,area,ciudadano,fecha, motivo) VALUES(?,?,?,DATE(NOW()),?)");
 	$stm->bind_param("siss", $_POST['descripcion'], $_POST['area'], $_GET['id'], $_POST['motivo']);
 	$stm->execute();
-	header("Location: topdf.php?id=" . $_GET['id']);
+	header("Location: topdf.php?id=" . $stm->insert_id);
 }
 ?>
 <head>

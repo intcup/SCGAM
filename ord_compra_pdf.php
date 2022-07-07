@@ -52,8 +52,8 @@ while($stm_det->fetch()){
 }
 
 $pdf->Ln(5);
-$pdf->Image($ruta_f, 10, $pdf->getY() + 5, 80);
-$pdf->Image($ruta_r, 95, $pdf->getY() + 5, 80);
+$pdf->Image($ruta_f, 10, $pdf->getY() + 5, 0, 50);
+$pdf->Image($ruta_r, 95, $pdf->getY() + 5, 0, 50);
 $pdf->setY(-60, true);
 $pdf->Cell(0,5, 'Firmas Autorizadas', 0, 1, 'C');
 $pdf->SetDrawColor(0);

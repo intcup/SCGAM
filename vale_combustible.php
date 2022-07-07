@@ -13,7 +13,12 @@ if(isset($_POST['proveedor'])){
 	$db = include('db/connect.php');
 	$stm = $db->prepare('INSERT INTO vale_combustible(fecha, proveedor, tipo, ciudadano, justificacion, cantidad) VALUES(DATE(NOW()), ?, ?, ?, ?, ?)');
 	$stm->bind_param('isssi', $_POST['proveedor'], $_POST['tipo'], $_GET['id'], $_POST['justificacion'], $_POST['cantidad']);
-	$stm->execute();
+	try{
+		$stm->execute();
+		header("Location: vale_combustible_pdf.php?id=" . $stm->insert_id);
+	}catch (Exception $e){
+	
+	}
 }
 
 ?>
