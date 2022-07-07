@@ -7,7 +7,7 @@ require('./fpdf/fpdf.php');
 $db = require('db/connect.php');
 // Leer datos de la bd
 $db->query('SET lc_time_names = "es_MX"');
-$stm = $db->prepare('SELECT CONCAT(nombre, " ", ap_pat), descripcion, domicilio, DAY(fecha), MONTHNAME(fecha), YEAR(fecha), motivo FROM Apoyos LEFT JOIN Ciudadanos ON Apoyos.ciudadano = Ciudadanos.id WHERE Apoyos.id=?');
+$stm = $db->prepare('SELECT CONCAT(nombre, " ", ap_pat, " ", ap_mat), descripcion, domicilio, DAY(fecha), MONTHNAME(fecha), YEAR(fecha), motivo FROM Apoyos LEFT JOIN Ciudadanos ON Apoyos.ciudadano = Ciudadanos.id WHERE Apoyos.id=?');
 if(!isset($_GET['id'])){
 	header("Location: index.php");
 }
@@ -19,8 +19,8 @@ $stm->fetch();
 
 $pdf=new FPDF();
 $pdf->AddPage();
-$pdf->Image('escudo.jpg', 30, 5, 20);
-$pdf->Image('logo_doc.jpg', $pdf->GetPageWidth() - 55, 5, 35);
+$pdf->Image('escudo.png', 30, 5, 20);
+$pdf->Image('logo_doc.png', $pdf->GetPageWidth() - 55, 5, 35);
 $pdf->SetFont('Times','B',16);
 $pdf->MultiCell(0,6,'PRESIDENCIA MUNICIPAL
 	GRAL. ZARAGOZA, NUEVO LEON
@@ -40,13 +40,13 @@ $pdf->MultiCell(0, 6,
 	Presidente Municipal
 	Presente:
 	"), 0, 'L');
-$pdf->Write(6, "El (la) que suscribe la presente C. $nombre Con domicilio en: $domicilio
-Por este medio me dirijo a usted de la manera mas atenta y cordial, para solicitarle en la medida de sus posibilidades, tenga a bien otorgarme un apoyo que consiste en $descripcion por el siguiente motivo: $motivo
-	");
+$pdf->Write(6, "El (la) que suscribe la presente C. " . utf8_decode($nombre) . " Con domicilio en: " . utf8_decode($domicilio) .
+" Por este medio me dirijo a usted de la manera mas atenta y cordial, para solicitarle en la medida de sus posibilidades, tenga a bien otorgarme un apoyo que consiste en " . utf8_decode($descripcion) . " por el siguiente motivo: " . utf8_decode($motivo) );
 $pdf->Ln(60);
 $pdf->SetFont('Times','B',12);
-$pdf->Cell(0, 6, "Atentamente", 0, 1, 'C');
+$pdf->Cell(0, 6, "Atentamente:", 0, 1, 'C');
+$pdf->Cell(0, 6, utf8_decode($nombre), 0, 1, 'C');
 $pdf->SetDrawColor(0);
-$pdf->Line(60,$pdf->GetY() + 30,$pdf->GetPageWidth()-60, $pdf->GetY() + 30);
+$pdf->Line(60,$pdf->GetY() + 20,$pdf->GetPageWidth()-60, $pdf->GetY() + 20);
 $pdf->Output();
 ?>

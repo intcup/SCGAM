@@ -11,16 +11,10 @@ session_start();
 include "header.php";
 ?>
 <section class="content">
+<h1>Sistema de Control y Gestion de Apoyos Municipales</h1>
 <a href="registrar.php">Registrar Ciudadano</a>
 <a href="registros.php">Consultar Ciudadanos</a>
-<a href="ordenes_compra.php">Orden de compra</a>
-<a href="vales_combustible.php">Vales de combustible</a>
-<a href="apoyos_fecha.php">Apoyos Registrados hoy</a>
-<a href="apoyos_fecha.php?f=
-<?php
-echo date('Y-m-d', strtotime("-1 days"));
-?>
-">Apoyos Registrados ayer</a>
+<a href="perfil_ciudadano.php">Buscar perfil</a>
 </section>
 </body>
 </html>

@@ -38,6 +38,11 @@ orden.onsubmit = async (e) => {
 	formData.append("productos", art_items);
 	formData.append("cantidades", art_cants);
 	const request = new XMLHttpRequest();
-	request.open("POST", "orden_compra.php");
+	request.open("POST", window.location.href);
+	request.onload = function(){
+		if (this.readyState == 4 && this.status == 200) {
+			window.location = "ord_compra_pdf.php?id=" + request.responseText;
+		}
+	}
 	request.send(formData);
 }

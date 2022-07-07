@@ -5,11 +5,11 @@ if(!isset($_SESSION["user"])){
 	header("Location: index.php");	
 }
 
-if(isset($_POST['id'])){
-	$stm = $db->prepare("INSERT INTO Apoyos(descripcion,area,ciudadano,fecha, motivo) VALUES(?,?,?,SYSDATE(),?)");
-	$stm->bind_param("siis", $_POST['descripcion'], $_POST['area'], $_POST['id'], $_POST['motivo']);
+if(isset($_POST['env'])){
+	$stm = $db->prepare("INSERT INTO Apoyos(descripcion,area,ciudadano,fecha, motivo) VALUES(?,?,?,DATE(NOW()),?)");
+	$stm->bind_param("siss", $_POST['descripcion'], $_POST['area'], $_GET['id'], $_POST['motivo']);
 	$stm->execute();
-	header("Location: perfil_ciudadano.php?id=" . $_POST['id']);
+	header("Location: topdf.php?id=" . $_GET['id']);
 }
 ?>
 <head>
@@ -21,13 +21,11 @@ include "header.php";
 ?>
 <p>
 <form class="hor_form, content" method="post">
-<input value=
-"<?php
-echo $_GET['id'];
-?>"
-type="hidden" name="id">
+	<h1 class="icon" style="background-image: url('icon_agreg_ap.png')">Registrar Apoyo</h1>
+				<p id="datos_c"></p>
+<?php include('datos_ciudadano.php'); ?>
 <label for="area">Area</label>
-<select name="area">
+<select name="area" required>
 <?php
 	$areas = $db->prepare("SELECT id, nombre FROM Areas_Apoyos");
 	$areas->execute();
@@ -37,9 +35,9 @@ type="hidden" name="id">
 	}
 ?>
 </select>
-<label for="descripcion">Descripcion</label>
-<textarea name="descripcion"></textarea>
-<textarea name="motivo"></textarea>
-<input type="submit" value="Enviar">
+<textarea name="descripcion" placeholder="Descripcion" required></textarea>
+<textarea name="motivo" placeholder="Motivo" required></textarea>
+<input id="enviar" name="env" type="submit" value="Enviar">
 </form>
 </html>
+<script src="datos_ciudadano.js"></script>

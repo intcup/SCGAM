@@ -12,15 +12,17 @@ include('header.php');
 if(isset($_POST['proveedor'])){
 	$db = include('db/connect.php');
 	$stm = $db->prepare('INSERT INTO vale_combustible(fecha, proveedor, tipo, ciudadano, justificacion, cantidad) VALUES(DATE(NOW()), ?, ?, ?, ?, ?)');
-	$stm->bind_param('isssi', $_POST['proveedor'], $_POST['tipo'], $_POST['ciudadano'], $_POST['justificacion'], $_POST['cantidad']);
+	$stm->bind_param('isssi', $_POST['proveedor'], $_POST['tipo'], $_GET['id'], $_POST['justificacion'], $_POST['cantidad']);
 	$stm->execute();
 }
 
 ?>
 <section class="content">
-	<form method="POST">
+	<h1>Agregar Vale de Combustible</h1>
+<?php include('datos_ciudadano.php'); ?>
+<form method="POST">
 		<label>Proveedor</label>
-				<select name="proveedor">
+				<select name="proveedor" required>
 <?php
 $prov = $db->prepare('SELECT nombre, id FROM Proveedores');
 $prov->execute();
@@ -31,17 +33,16 @@ while($prov->fetch()){
 ?>
 		</select>
 		<label>Tipo</label>
-		<select name="tipo">
+		<select name="tipo" required>
 			<option>Gasolina</option>
 			<option>Diesel</option>
 			<option>Gas</option>
 		</select>
-				<label>Cantidad</label>
-				<input name="cantidad" type="number" step="1"/>
-				<label>Ciudadano</label>
-				<input name="ciudadano"/>
-				<label>Justificacion</label>
-				<input name="justificacion"/>
-				<input value="Enviar" type="submit"/>
-	</form>
+				<input name="cantidad" type="number" step="1" required/>
+			<br>
+			<input name="justificacion" placeholder="Justificacion" required/>
+			<input id="enviar" value="Enviar" type="submit"/>
+</form>
 </section>
+
+<script src="datos_ciudadano.js"></script>
